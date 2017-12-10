@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/19 10:08:21 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/10 13:40:07 by sdelhomm         ###   ########.fr       */
+/*   Created: 2017/11/08 14:04:56 by sdelhomm          #+#    #+#             */
+/*   Updated: 2017/11/29 23:12:53 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# define BUFF_SIZE 42
-
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-typedef struct	s_param
+char	*ft_strstr(const char *mdf, const char *aig)
 {
-	char	*cont;
-	int		nw;
-	int		i;
-}				t_param;
+	int i;
+	int k;
+	int len;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	k = 0;
+	len = ft_strlen(aig);
+	if (aig[0] == '\0')
+		return ((char*)mdf);
+	while (mdf[i])
+	{
+		while (aig[k] == mdf[i + k])
+		{
+			if (k == len - 1)
+				return ((char*)mdf + i);
+			k++;
+		}
+		k = 0;
+		i++;
+	}
+	return (0);
+}
