@@ -6,7 +6,7 @@
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 10:08:21 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/10 13:40:07 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/12 15:18:50 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 
 # define BUFF_SIZE 42
 
-# include <fcntl.h>
+# include "libft/libft.h"
 # include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <stdlib.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 typedef struct	s_param
 {
