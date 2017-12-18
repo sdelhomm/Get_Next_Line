@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sdelhomm <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#   .oreated: 2017/11/09 10:08:33 by sdelhomm          #+#    #+#              #
-#    Updated: 2017/11/17 13:54:38 by sdelhomm         ###   ########.fr        #
+#    Created: 2017/11/09 10:08:33 by sdelhomm          #+#    #+#              #
+#    Updated: 2017/12/18 11:07:40 by sdelhomm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ = ft_atoi.o ft_isalpha.o ft_isprint.o ft_memccpy.o ft_memcpy.o \
 	  ft_isdigit.o ft_memalloc.o ft_memcmp.o ft_memmove.o ft_putchar_fd.o \
 	  ft_putnbr.o ft_putstr_fd.o ft_strclr.o ft_strdel.o ft_striter.o \
 	  ft_strlcat.o ft_strmapi.o ft_strncpy.o ft_strnstr.o ft_strstr.o \
-	  ft_tolower.o
+	  ft_tolower.o ft_strjoin_free.o
 
 SRCS = ft_atoi.c ft_isalpha.c ft_isprint.c ft_memccpy.c ft_memcpy.c \
 	   ft_memset.c ft_putendl.c ft_putnbr_fd.c ft_strcat.c ft_strcmp.c \
@@ -34,7 +34,7 @@ SRCS = ft_atoi.c ft_isalpha.c ft_isprint.c ft_memccpy.c ft_memcpy.c \
 	   ft_isalnum.c ft_isdigit.c ft_memalloc.c ft_memcmp.c ft_memmove.c \
 	   ft_putchar_fd.c ft_putnbr.c ft_putstr_fd.c ft_strclr.c ft_strdel.c \
 	   ft_striter.c ft_strlcat.c ft_strmapi.c ft_strncpy.c ft_strnstr.c \
-	   ft_strstr.c ft_tolower.c
+	   ft_strstr.c ft_tolower.c ft_strjoin_free.c
 
 all: $(NAME)
 

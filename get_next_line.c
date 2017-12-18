@@ -6,7 +6,7 @@
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 10:00:23 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/10 11:35:25 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/18 11:07:37 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,29 @@ static char		*stock_buffer(int fd)
 	int		buff_s;
 
 	buff_s = BUFF_SIZE;
-	if (!(buf = (char*)malloc(buff_s * sizeof(*buf))))
+	if (!(buf = (char*)malloc(buff_s + 1 * sizeof(*buf))))
 		return (NULL);
-	if (!(cont = (char*)malloc(32768 * sizeof(*cont))))
+	if (!(cont = (char*)malloc(1 * sizeof(*buf))))
 		return (NULL);
+	cont[0] = '\0';
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret == -1)
 			return (NULL);
 		buf[ret] = '\0';
-		cont = ft_strcat(cont, buf);
+		cont = ft_strjoin_free(cont, buf);
 	}
 	free(buf);
 	return (cont);
 }
 
-static int		line_size(char *cont, int i)
+static int		line_size(char *cont, size_t i, size_t len)
 {
-	int j;
+	size_t j;
 
 	j = 0;
+	if (i >= len)
+		return (0);
 	while (cont[i] != '\n' && cont[i])
 	{
 		j++;
@@ -48,54 +51,51 @@ static int		line_size(char *cont, int i)
 	return (j);
 }
 
-static int		check_eol(char ***line, t_param *p)
+static int		check_eof(char ***line, t_param *p)
 {
 	**line = NULL;
-	p->i++;
-	if (p->cont[p->i])
+	if (p->i < p->len)
 	{
+		p->i++;
+		**line = ft_strnew(0);
+		if (p->i == p->len)
+		{
+			p->i = 0;
+			p->nw = 0;
+			ft_strdel(&p->cont);
+		}
 		return (1);
 	}
 	p->i = 0;
 	p->nw = 0;
-	return (0);
-}
-
-static int		check_eof(t_param *p)
-{
-	if (p->i <= ft_strlen(p->cont) + 1)
-	{
-		return (1);
-	}
-	p->i = 0;
-	p->nw = 0;
+	ft_strdel(&p->cont);
 	return (0);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_param	p;
+	static t_param	p[1024];
 	char			*tmp;
 	int				j;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	if (p.nw == 0)
+	if (p[fd].nw == 0)
 	{
-		if (!(p.cont = stock_buffer(fd)))
+		if (!(p[fd].cont = stock_buffer(fd)))
 			return (-1);
-		p.nw = 1;
+		p[fd].nw = 1;
+		p[fd].len = ft_strlen(p[fd].cont);
 	}
-	if (line_size(p.cont, p.i) == 0)
-		return (check_eol(&line, &p));
-	if (!(tmp = (char*)malloc((line_size(p.cont, p.i) + 1) * sizeof(*tmp))))
+	if (line_size(p[fd].cont, p[fd].i, p[fd].len) == 0)
+		return (check_eof(&line, p + fd));
+	if (!(tmp = ft_strnew((line_size(p[fd].cont, p[fd].i, p[fd].len) + 1))))
 		return (-1);
-	*line = tmp;
 	j = 0;
-	while (p.cont[p.i] != '\n' && p.cont[p.i])
-		tmp[j++] = p.cont[p.i++];
-	p.i++;
+	while (p[fd].cont[p[fd].i] != '\n' && p[fd].cont[p[fd].i])
+		tmp[j++] = p[fd].cont[p[fd].i++];
+	p[fd].i++;
 	tmp[j] = '\0';
-	free(tmp);
-	return (check_eof(&p));
+	*line = tmp;
+	return (1);
 }

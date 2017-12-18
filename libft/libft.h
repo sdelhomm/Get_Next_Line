@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdelhomm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 16:05:33 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/11/17 13:42:15 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/18 10:59:05 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,7 @@ char	*ft_strtrim(char const *s);
 int		ft_tolower(int c);
 
 int		ft_toupper(int c);
+
+char	*ft_strjoin_free(char *s1, char *s2);
 
 #endif
