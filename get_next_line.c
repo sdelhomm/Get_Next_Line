@@ -6,7 +6,7 @@
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 10:00:23 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/18 11:07:37 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/20 09:27:10 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int				get_next_line(const int fd, char **line)
 	char			*tmp;
 	int				j;
 
-	if (fd < 0 || line == NULL)
+	if (fd < 0 || line == NULL || fd >= 1024)
 		return (-1);
 	if (p[fd].nw == 0)
 	{
