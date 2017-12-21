@@ -6,7 +6,7 @@
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 10:55:30 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/18 11:06:07 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/21 11:54:18 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct	s_param
 	size_t	i;
 	int		nw;
 }				t_param;
+
+# define PROTECT(Alloc) if (!Alloc) return (-1);
 
 int				get_next_line(const int fd, char **line);
 

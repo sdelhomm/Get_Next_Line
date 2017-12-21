@@ -6,7 +6,7 @@
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 10:00:23 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/20 09:27:10 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/21 15:28:49 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int				get_next_line(const int fd, char **line)
 	char			*tmp;
 	int				j;
 
-	if (fd < 0 || line == NULL || fd >= 1024)
+	PROTECT(line);
+	*line = NULL;
+	if (fd < 0 || read(fd, 0, 0) < 0 || fd >= 1024)
 		return (-1);
 	if (p[fd].nw == 0)
 	{
@@ -89,8 +91,7 @@ int				get_next_line(const int fd, char **line)
 	}
 	if (line_size(p[fd].cont, p[fd].i, p[fd].len) == 0)
 		return (check_eof(&line, p + fd));
-	if (!(tmp = ft_strnew((line_size(p[fd].cont, p[fd].i, p[fd].len) + 1))))
-		return (-1);
+	PROTECT((tmp = ft_strnew((line_size(p[fd].cont, p[fd].i, p[fd].len) + 1))));
 	j = 0;
 	while (p[fd].cont[p[fd].i] != '\n' && p[fd].cont[p[fd].i])
 		tmp[j++] = p[fd].cont[p[fd].i++];
