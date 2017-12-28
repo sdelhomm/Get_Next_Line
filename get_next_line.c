@@ -6,7 +6,7 @@
 /*   By: sdelhomm <sdelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 10:00:23 by sdelhomm          #+#    #+#             */
-/*   Updated: 2017/12/21 15:28:49 by sdelhomm         ###   ########.fr       */
+/*   Updated: 2017/12/28 09:36:41 by sdelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ static int		check_eof(char ***line, t_param *p)
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_param	p[1024];
+	static t_param	p[4864];
 	char			*tmp;
 	int				j;
 
 	PROTECT(line);
 	*line = NULL;
-	if (fd < 0 || read(fd, 0, 0) < 0 || fd >= 1024)
+	if (fd < 0 || read(fd, 0, 0) < 0 || fd >= 4864)
 		return (-1);
 	if (p[fd].nw == 0)
 	{
